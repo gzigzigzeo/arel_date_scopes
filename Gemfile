@@ -8,7 +8,9 @@ if RUBY_VERSION < '1.9'
 end
 
 group :test do
-  gem "activerecord", "> 3"
+  gem "activerecord", "> 3", :require => "active_record"
+  gem "activesupport", "> 3"  
+  gem "sqlite3-ruby"
 end
 
 gem "rspec"

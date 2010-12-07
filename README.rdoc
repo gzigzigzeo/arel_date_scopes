@@ -1,7 +1,7 @@
 = Date Scopes
 
 * AREL 2 mysql date functions (DATE(), YEAR(), DAYOFMONTH())
-* AR 3 scopes:
+* AR 3 scopes.
   
 = Pure AREL example:
 
@@ -13,7 +13,7 @@
 = AR example:
 
   class News < ActiveRecord::Base
-    date_scopes :created_at
+    date_scopes_for :created_at
   end
   
   News.created_at_year_eq(2009).all
