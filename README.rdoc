@@ -3,3 +3,32 @@
 * AREL 2 mysql date functions (DATE(), YEAR(), DAYOFMONTH())
 * AR 3 scopes:
   
+= Pure AREL example:
+
+  users = Table[:users]
+  users.where(users[:created_at].year.eq(2009))
+  users.where(users[:created_at].month.gt(2))
+  users.where(users[:created_at].dayofmonth.in(1..20))
+  
+= AR example:
+
+  class News < ActiveRecord::Base
+    date_scopes :created_at
+  end
+  
+  News.created_at_year_eq(2009).all
+  News.created_at_year_eq(2009).created_at_month_eq(5).all
+  News.created_at_months.all # SELECT MONTH(created_at) AS created_at_month FROM news
+
+= Scopes list:
+
+* ..._year_eq
+* ..._month_eq  
+* ..._day_eq
+* ..._years
+* ..._months
+* ..._days
+  
+= TODO:
+* Scopes through method_missing
+* More elegant scope syntax (may be like in AREL itself)
