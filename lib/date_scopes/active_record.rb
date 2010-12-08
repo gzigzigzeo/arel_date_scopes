@@ -21,12 +21,17 @@ module DateScopes
         
         scope :"#{field}_years", lambda {
           t = arel_table
-          select(t[field].year)
+          select(t[field].year).group(t[field].year)
         }
 
         scope :"#{field}_months", lambda {
           t = arel_table
-          select(t[field].month)
+          select(t[field].month).group(t[field].month)
+        }
+
+        scope :"#{field}_days", lambda {
+          t = arel_table
+          select(t[field].day).group(t[field].day)
         }
         
         scope :"descend_by_#{field}", order("#{field} DESC")
