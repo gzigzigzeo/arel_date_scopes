@@ -18,6 +18,20 @@ module DateScopes
           t = arel_table
           where(t[field].dayofmonth.eq(day))
         }
+        
+        scope :"#{field}_years", lambda {
+          t = arel_table
+          select(t[field].year)
+        }
+
+        scope :"#{field}_months", lambda {
+          t = arel_table
+          select(t[field].month)
+        }
+      end
+      
+      def all_column(field)
+        scoped.all.map { |row| row[field] }
       end
     end
   end
