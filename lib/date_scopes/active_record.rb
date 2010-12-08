@@ -28,6 +28,9 @@ module DateScopes
           t = arel_table
           select(t[field].month)
         }
+        
+        scope :"descend_by_#{field}", order("#{field} DESC")
+        scope :"ascend_by_#{field}", order("#{field} ASC")        
       end
       
       def all_column(field)

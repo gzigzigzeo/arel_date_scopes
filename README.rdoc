@@ -28,6 +28,8 @@
 * ..._years
 * ..._months
 * ..._days
+* ascend_by_...
+* descend_by_...
   
 = TODO:
 * Scopes through method_missing
