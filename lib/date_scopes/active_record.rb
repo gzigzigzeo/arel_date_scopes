@@ -21,25 +21,28 @@ module DateScopes
         
         scope :"#{field}_years", lambda {
           t = arel_table
-          select(t[field].year).group(t[field].year)
+          select(t[field].year.as("#{field}_year")).group(t[field].year)
         }
 
         scope :"#{field}_months", lambda {
           t = arel_table
-          select(t[field].month).group(t[field].month)
+          select(t[field].month.as("#{field}_month")).group(t[field].month)
         }
 
         scope :"#{field}_days", lambda {
           t = arel_table
-          select(t[field].day).group(t[field].day)
+          select(t[field].dayofmonth.as("#{field}_day")).group(t[field].dayofmonth)
         }
         
         scope :"descend_by_#{field}", order("#{field} DESC")
         scope :"ascend_by_#{field}", order("#{field} ASC")        
       end
       
-      def all_column(field)
-        scoped.all.map { |row| row[field] }
+      def all_column(field = nil)
+        rows = scoped.all
+        return [] if rows.empty?
+        field ||= rows.first.attributes.keys.first
+        rows.map { |row| row[field] }
       end
     end
   end
