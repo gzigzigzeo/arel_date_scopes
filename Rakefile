@@ -14,7 +14,7 @@ begin
   require "jeweler"
   Jeweler::Tasks.new do |s|
     s.name              = "date_scopes"
-    s.version           = "0.1.0"
+    s.version           = "0.1.1"
     s.author            = "Victor Sokolov"
     s.email             = "gzigzigzeo@gmail.com"
     s.homepage          = "http://github.com/gzigzigzeo/date-scopes"
