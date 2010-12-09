@@ -5,12 +5,12 @@
 
 Gem::Specification.new do |s|
   s.name = %q{date_scopes}
-  s.version = "0.1.0"
+  s.version = "0.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Victor Sokolov"]
-  s.date = %q{2010-12-07}
-  s.description = %q{MySQL date functions for AREL2 + AR date scopes}
+  s.date = %q{2010-12-09}
+  s.description = %q{MySQL date functions for AREL 2 + AR 3 date scopes}
   s.email = %q{gzigzigzeo@gmail.com}
   s.extra_rdoc_files = [
     "README.rdoc"
@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
      "lib/date_scopes/arel.rb",
      "lib/date_scopes/railtie.rb",
      "spec/date_scopes/date_scopes_arel_spec.rb",
+     "spec/date_scopes/date_scopes_spec.rb",
      "spec/spec_helper.rb",
      "spec/support/fake_record.rb"
   ]
@@ -30,9 +31,10 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
-  s.summary = %q{MySQL date functions for AREL2 + AR date scopes}
+  s.summary = %q{MySQL date functions for AREL 2 + AR 3 date scopes}
   s.test_files = [
     "spec/date_scopes/date_scopes_arel_spec.rb",
+     "spec/date_scopes/date_scopes_spec.rb",
      "spec/spec_helper.rb",
      "spec/support/fake_record.rb"
   ]
