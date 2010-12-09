@@ -4,7 +4,7 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{date_scopes}
+  s.name = %q{arel_date_scopes}
   s.version = "0.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
@@ -18,23 +18,23 @@ Gem::Specification.new do |s|
   s.files = [
     "README.rdoc",
      "Rakefile",
-     "lib/date_scopes.rb",
-     "lib/date_scopes/active_record.rb",
-     "lib/date_scopes/arel.rb",
-     "lib/date_scopes/railtie.rb",
-     "spec/date_scopes/date_scopes_arel_spec.rb",
-     "spec/date_scopes/date_scopes_spec.rb",
+     "lib/arel_date_scopes.rb",
+     "lib/arel_date_scopes/active_record.rb",
+     "lib/arel_date_scopes/arel.rb",
+     "lib/arel_date_scopes/railtie.rb",
+     "spec/arel_date_scopes/date_scopes_arel_spec.rb",
+     "spec/arel_date_scopes/date_scopes_spec.rb",
      "spec/spec_helper.rb",
      "spec/support/fake_record.rb"
   ]
-  s.homepage = %q{http://github.com/gzigzigzeo/date-scopes}
+  s.homepage = %q{http://github.com/gzigzigzeo/arel_date_scopes}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{MySQL date functions for AREL 2 + AR 3 date scopes}
   s.test_files = [
-    "spec/date_scopes/date_scopes_arel_spec.rb",
-     "spec/date_scopes/date_scopes_spec.rb",
+    "spec/arel_date_scopes/date_scopes_arel_spec.rb",
+     "spec/arel_date_scopes/date_scopes_spec.rb",
      "spec/spec_helper.rb",
      "spec/support/fake_record.rb"
   ]
@@ -44,9 +44,12 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<arel>, [">= 2"])
     else
+      s.add_dependency(%q<arel>, [">= 2"])
     end
   else
+    s.add_dependency(%q<arel>, [">= 2"])
   end
 end
 

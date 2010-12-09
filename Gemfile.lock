@@ -1,7 +1,8 @@
 PATH
   remote: .
   specs:
-    date_scopes (0.1.0)
+    arel_date_scopes (0.1.1)
+      arel (>= 2)
 
 GEM
   remote: http://rubygems.org/
@@ -45,7 +46,7 @@ DEPENDENCIES
   activerecord (> 3)
   activesupport (> 3)
   arel (>= 2)
-  date_scopes!
+  arel_date_scopes!
   rspec
   ruby-debug (>= 0.10.3)
   sqlite3-ruby

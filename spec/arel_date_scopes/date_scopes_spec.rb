@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "date_scopes AR specs" do  
+describe "date scopes AR specs" do  
   it "_eq scopes should exists" do
     User.created_at_year_eq(2009).to_sql.should eq('SELECT "users".* FROM "users" WHERE (YEAR("users"."created_at") = 2009)')
     User.created_at_month_eq(1).to_sql.should eq('SELECT "users".* FROM "users" WHERE (MONTH("users"."created_at") = 1)')

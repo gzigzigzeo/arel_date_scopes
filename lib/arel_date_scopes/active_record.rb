@@ -1,4 +1,4 @@
-module DateScopes
+module ArelDateScopes
   module ActiveRecord
     extend ActiveSupport::Concern
 

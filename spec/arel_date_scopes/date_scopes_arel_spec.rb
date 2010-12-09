@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "date_scopes AREL extensions" do
+describe "date scopes AREL extensions" do
   before(:each) do
     @table = Arel::Table.new(:users)
     @visitor = Arel::Visitors::MySQL.new Arel::Table.engine

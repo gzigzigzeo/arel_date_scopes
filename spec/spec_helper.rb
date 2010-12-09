@@ -24,7 +24,7 @@ ActiveRecord::Base.establish_connection(
 Arel::Table.engine = Arel::Sql::Engine.new(FakeRecord::Base.new)
 
 ActiveRecord::Base.logger = Logger.new(nil)
-ActiveRecord::Base.send(:include, DateScopes::ActiveRecord)
+ActiveRecord::Base.send(:include, ArelDateScopes::ActiveRecord)
 
 class User < ActiveRecord::Base
   set_table_name 'users'

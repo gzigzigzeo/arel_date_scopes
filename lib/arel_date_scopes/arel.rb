@@ -1,4 +1,4 @@
-module DateScopes
+module ArelDateScopes
   # Workaround for Rails. Rails tries to threat left operands of == as Attribute object, but it can be
   # a function like YEAR(). Fake #name should return "#{field}_#{function}" to resolve field conflicts.
   module ArelAttributeEmulation
@@ -11,17 +11,17 @@ module Arel
   module Nodes
     class Year < Arel::Nodes::Function
       include Arel::Predications
-      include DateScopes::ArelAttributeEmulation
+      include ArelDateScopes::ArelAttributeEmulation
     end
 
     class Month < Arel::Nodes::Function
       include Arel::Predications
-      include DateScopes::ArelAttributeEmulation      
+      include ArelDateScopes::ArelAttributeEmulation      
     end
 
     class DayOfMonth < Arel::Nodes::Function
       include Arel::Predications
-      include DateScopes::ArelAttributeEmulation      
+      include ArelDateScopes::ArelAttributeEmulation      
     end
   end
 

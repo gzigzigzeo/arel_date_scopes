@@ -1,7 +1,7 @@
 source "http://rubygems.org"
 
 gem 'arel', '>= 2'
-gem 'date_scopes', :path => '.'
+gem 'arel_date_scopes', :path => '.'
 
 if RUBY_VERSION < '1.9'
   gem "ruby-debug", ">= 0.10.3"
