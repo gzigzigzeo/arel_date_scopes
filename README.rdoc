@@ -1,4 +1,4 @@
-= Date Scopes
+= Arel Date Scopes
 
 * AREL 2 mysql date functions (DATE(), YEAR(), DAYOFMONTH())
 * AR 3 scopes.
