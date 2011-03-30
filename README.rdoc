@@ -1,9 +1,19 @@
 = Arel Date Scopes
 
-* AREL 2 mysql date functions (DATE(), YEAR(), DAYOFMONTH())
+This gem is useful when you want to navigate through your records by year, month or day - for example, at news archive page.
+
+* AREL 2 date functions (DATE(), YEAR(), DAYOFMONTH() for MySQL, CAST(STRFTIME(...)) for SQLite)
 * AR 3 scopes.
+
+= Installation
+
+Put following line in your Gemfile:
+
+  gem 'arel_date_scopes'
   
 = Pure AREL example:
+
+Let the users table have created_at field.
 
   users = Table[:users]
   users.where(users[:created_at].year.eq(2009))
@@ -12,25 +22,30 @@
   
 = AR example:
 
+Let the news table have created_at field and contain news for two years: 2008 and 2009.
+
   class News < ActiveRecord::Base
-    date_scopes_for :created_at
+    date_scopes_for :created_at # Creates scopes for created_at field.
   end
-  
+
+The news model will get following scopes:
+
+* created_at_year_eq
+* created_at_month_eq  
+* created_at_day_eq
+* created_at_years
+* created_at_months
+* created_at_days
+* ascend_by_created_at
+* descend_by_created_at
+
+Usage example:
+
   News.created_at_year_eq(2009).all
   News.created_at_year_eq(2009).created_at_month_eq(5).all
-  News.created_at_months.all # SELECT MONTH(created_at) AS created_at_month FROM news
-
-= Scopes list:
-
-* ..._year_eq
-* ..._month_eq  
-* ..._day_eq
-* ..._years
-* ..._months
-* ..._days
-* ascend_by_...
-* descend_by_...
+  News.descend_by_created_at.created_at_years.all.first['created_at_year']     # 2009
+  News.ascend_by_created_at.created_at_years.all_column                        # [2008, 2009]
   
 = TODO:
-* Scopes through method_missing
-* More elegant scope syntax (may be like in AREL itself)
+
+* Create scopes through method_missing like searchlogic.
