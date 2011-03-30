@@ -1,3 +1,4 @@
+# Mock to make AREL work without regular database.
 module FakeRecord
   class Column < Struct.new(:name, :type)
   end
@@ -6,13 +7,11 @@ module FakeRecord
     attr_reader :tables
 
     def initialize
-      @tables = %w{ users photos developers }
+      @tables = %w{ users }
       @columns = {
         'users' => [
           Column.new('id', :integer),
-          Column.new('name', :string),
-          Column.new('bool', :boolean),
-          Column.new('created_at', :date),
+          Column.new('created_at', :date)
         ]
       }
       @primary_keys = {
@@ -67,8 +66,8 @@ module FakeRecord
 
     attr_reader :spec, :connection
 
-    def initialize
-      @spec = Spec.new(:adapter => 'mysql')
+    def initialize(adapter)
+      @spec = Spec.new(adapter)
       @connection = Connection.new
     end
 
@@ -80,8 +79,8 @@ module FakeRecord
   class Base
     attr_accessor :connection_pool
 
-    def initialize
-      @connection_pool = ConnectionPool.new
+    def initialize(adapter)
+      @connection_pool = ConnectionPool.new(adapter)
     end
 
     def connection

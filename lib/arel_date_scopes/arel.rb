@@ -42,6 +42,24 @@ module Arel
   end
 
   module Visitors
+    class SQLite
+      private
+      def visit_Arel_Nodes_Year o
+        "CAST(STRFTIME('%Y', #{o.expressions.map { |x|
+          visit x }.join(', ')}) AS INTEGER)#{o.alias ? " AS #{visit o.alias}" : ''}"
+      end      
+
+      def visit_Arel_Nodes_Month o
+        "CAST(STRFTIME('%m', #{o.expressions.map { |x|
+          visit x }.join(', ')}) AS INTEGER)#{o.alias ? " AS #{visit o.alias}" : ''}"
+      end
+
+      def visit_Arel_Nodes_DayOfMonth o
+        "CAST(STRFTIME('%d', #{o.expressions.map { |x|
+          visit x }.join(', ')}) AS INTEGER)#{o.alias ? " AS #{visit o.alias}" : ''}"
+      end        
+    end
+    
     class MySQL
       private
       def visit_Arel_Nodes_Year o

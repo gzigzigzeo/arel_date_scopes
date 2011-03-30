@@ -1,20 +1,52 @@
 require 'spec_helper'
 
-describe "date scopes AR specs" do  
-  it "_eq scopes should exists" do
-    User.created_at_year_eq(2009).to_sql.should eq('SELECT "users".* FROM "users" WHERE YEAR("users"."created_at") = 2009')
-    User.created_at_month_eq(1).to_sql.should eq('SELECT "users".* FROM "users" WHERE MONTH("users"."created_at") = 1')
-    User.created_at_day_eq(29).to_sql.should eq('SELECT "users".* FROM "users" WHERE DAYOFMONTH("users"."created_at") = 29')
+describe "date_scopes AR specs" do
+  before(:each) do
+    User.destroy_all
+    @users = [
+      User.create(:created_at => Date.new(2009, 1, 29)),
+      User.create(:created_at => Date.new(2008, 1, 1))  
+    ]  
   end
   
-  it "_years/_months scopes should exits" do
-    User.created_at_years.to_sql.should eq('SELECT YEAR("users"."created_at") AS \'created_at_year\' FROM "users" GROUP BY YEAR("users"."created_at")')
-    User.created_at_months.to_sql.should eq('SELECT MONTH("users"."created_at") AS \'created_at_month\' FROM "users" GROUP BY MONTH("users"."created_at")')    
-    User.created_at_days.to_sql.should eq('SELECT DAYOFMONTH("users"."created_at") AS \'created_at_day\' FROM "users" GROUP BY DAYOFMONTH("users"."created_at")')        
+  it "have working *_eq" do    
+    @by_year = User.created_at_year_eq(2009)
+    @by_year.count.should == 1
+    @by_year.first.should == @users.first
+    
+    @by_month = User.created_at_month_eq(1)
+    @by_month.count.should == 2
+    @by_month.should include(@users.first)
+    @by_month.should include(@users.second)    
+
+    @by_month = User.created_at_day_eq(29)
+    @by_month.count.should == 1
+    @by_month.first.should == @users.first
+  end
+  
+  it "have working *_years/*_months scopes" do
+    @years = User.order('created_at DESC').created_at_years.all
+    @years.count.should == 2
+    @years.first['created_at_year'].should == 2009
+    @years.last['created_at_year'].should == 2008
+
+    @months = User.order('created_at DESC').created_at_years.created_at_months.all
+    @months.count.should == 2
+    @months.first['created_at_month'].should == 1
+    @months.last['created_at_month'].should == 1
+
+    @days = User.order('created_at DESC').created_at_days.all
+    @days.count.should == 2
+    @days.first['created_at_day'].should == 29
+    @days.last['created_at_day'].should == 1
   end
 
-  it "ascend_/descend_ scopes should exits" do
-    User.created_at_year_eq(2009).ascend_by_created_at.to_sql.should eq('SELECT "users".* FROM "users" WHERE YEAR("users"."created_at") = 2009 ORDER BY created_at ASC')
-    User.created_at_year_eq(2009).created_at_month_eq(1).descend_by_created_at.to_sql.should eq('SELECT "users".* FROM "users" WHERE YEAR("users"."created_at") = 2009 AND MONTH("users"."created_at") = 1 ORDER BY created_at DESC')    
+  it "have working ascend_*/descend_* scopes" do
+    User.ascend_by_created_at.all.should eq(@users.reverse)
+    User.descend_by_created_at.all.should eq(@users)
+  end
+  
+  it "gets column value with all_column" do
+    User.ascend_by_created_at.created_at_years.all_column.should == [2008, 2009]
   end
 end

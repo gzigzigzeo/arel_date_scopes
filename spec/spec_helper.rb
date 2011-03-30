@@ -20,11 +20,14 @@ ActiveRecord::Base.establish_connection(
   "database" => ":memory:"
 )
 
-# Replace AREL engine by our fake engine with schema and so on
-Arel::Table.engine = Arel::Sql::Engine.new(FakeRecord::Base.new)
-
 ActiveRecord::Base.logger = Logger.new(nil)
 ActiveRecord::Base.send(:include, ArelDateScopes::ActiveRecord)
+
+ActiveRecord::Schema.define :version => 0 do
+  create_table "users", :force => true do |t|
+    t.datetime :created_at
+  end
+end
 
 class User < ActiveRecord::Base
   set_table_name 'users'
