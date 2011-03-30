@@ -1,6 +1,6 @@
 = Arel Date Scopes
 
-This gem is useful when you want to navigate through your records by year, month or day - for example, at news archive page.
+This gem is useful when you want to navigate through your records by years, months or days - for example, at news archive page.
 
 * AREL 2 date functions (DATE(), YEAR(), DAYOFMONTH() for MySQL, CAST(STRFTIME(...)) for SQLite)
 * AR 3 scopes.
@@ -28,7 +28,7 @@ Let the news table have created_at field and contain news for two years: 2008 an
     date_scopes_for :created_at # Creates scopes for created_at field.
   end
 
-The news model will get following scopes:
+The News model gets the following scopes:
 
 * created_at_year_eq
 * created_at_month_eq  
