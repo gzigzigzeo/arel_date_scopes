@@ -2,7 +2,7 @@ require 'rake'
 require 'rake/testtask'
 require 'rspec/core'
 require 'rspec/core/rake_task'
-require 'acts_as_sequence'
+require 'arel_date_scopes'
 require 'bundler'
 
 Bundler::GemHelper.install_tasks

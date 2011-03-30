@@ -1,17 +1,17 @@
 $LOAD_PATH << "." unless $LOAD_PATH.include?(".")
 
+require 'logger'
+require "bundler"
+
 begin
-  require "bundler"
   Bundler.setup
+  Bundler.require
 rescue Bundler::GemNotFound
   raise RuntimeError, "Bundler couldn't find some gems." +
     "Did you run `bundle install`?"
 end
 
-Bundler.require :test
-Bundler.require
-
-require 'logger'
+require 'active_record'
 require 'support/fake_record'
 
 # Fake connection to supress ConnectionNotEstablished on AR tests

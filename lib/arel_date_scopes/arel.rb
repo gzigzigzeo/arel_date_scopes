@@ -1,3 +1,5 @@
+require 'arel'
+
 module ArelDateScopes
   # Workaround for Rails. Rails tries to threat left operands of == as Attribute object, but it can be
   # a function like YEAR(). Fake #name should return "#{field}_#{function}" to resolve field conflicts.

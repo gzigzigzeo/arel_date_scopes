@@ -1,7 +1,9 @@
 PATH
   remote: .
   specs:
-    arel_date_scopes (0.1.1)
+    arel_date_scopes (0.0.2)
+      activerecord (~> 3.0.0)
+      activesupport (~> 3.0.0)
       arel (>= 2)
 
 GEM
@@ -38,9 +40,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord (> 3)
-  activesupport (> 3)
-  arel (>= 2)
   arel_date_scopes!
   rspec
   sqlite3-ruby

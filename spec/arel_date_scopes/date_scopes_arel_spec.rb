@@ -5,7 +5,7 @@ describe "date_scopes AREL extensions" do
   
   context("for MySQL") do
     before(:each) do
-      @visitor = Arel::Visitors::MySQL.new (Arel::Sql::Engine.new(FakeRecord::Base.new('mysql')))
+      @visitor = Arel::Visitors::MySQL.new(Arel::Sql::Engine.new(FakeRecord::Base.new('mysql')))
     end
   
     it "should correctly transform to_sql DATE, MONTH, DAYOFMONTH" do
@@ -19,7 +19,7 @@ describe "date_scopes AREL extensions" do
 
   context("for SQLite") do
     before(:each) do      
-      @visitor = Arel::Visitors::SQLite.new (Arel::Sql::Engine.new(FakeRecord::Base.new('sqlite')))
+      @visitor = Arel::Visitors::SQLite.new(Arel::Sql::Engine.new(FakeRecord::Base.new('sqlite')))
     end
   
     it "should correctly transform to_sql DATE, MONTH, DAYOFMONTH" do
